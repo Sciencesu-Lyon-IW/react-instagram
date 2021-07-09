@@ -1,4 +1,10 @@
+# Team Project
+
+
 # Getting Started with Create React App
+### `Ghoul Lounes`
+### `Mutabarouka Assoumani`
+### `Piot Julien`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
