@@ -5,7 +5,6 @@ import User from "../components/User";
 import Edit from "../components/Edit";
 import Infos from "../components/Infos";
 import Description from "../components/Description";
-import Post from "../components/Post";
 
 
 const Registration = () => {
@@ -14,18 +13,15 @@ const Registration = () => {
         <div>
             <header>
                 <div className="container">
-                    <Post/>
-                </div>
-            </header>
-            <main>
-                <div className="container">
-                    <div className="gallery">
-                        <Img/>
-                        <Img/>
-                        <Img/>
+                    <div className="profile">
+                        <Image/>
+                        <User/>
+                        <Edit/>
+                        <Infos/>
+                        <Description/>
                     </div>
                 </div>
-            </main>
+            </header>
         </div>
     );
 };
