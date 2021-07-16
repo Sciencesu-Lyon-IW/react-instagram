@@ -4,10 +4,17 @@ import Profile from "./pages/Profile";
 import Content from "./pages/Content";
 
 function App() {
+    let isAuthenticated = false
   return (
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
+            {!isAuthenticated ? (
+                <Route exact path='/' component={Home}/>
+            ) : (
+                <Route path="/home" exact component={Content} />
+            )}
+
             <Route path="/profile" exact component={Profile} />
             <Route path="/home" exact component={Content} />
           <Route component={Error} />
