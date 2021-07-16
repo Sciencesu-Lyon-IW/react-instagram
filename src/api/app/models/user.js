@@ -17,7 +17,29 @@ const userSchema = new mongoose.Schema({
     lastname: {
         type: String,
         required: true,
-    }
+    },
+    followers : {
+        type: Object,
+        required: false,
+        followed: {
+            creatorId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+        }
+    },
+    follows : {
+        type: Object,
+        required: false,
+        followed: {
+            creatorId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+        }
+    },
 
 }, {
     timestamps: true

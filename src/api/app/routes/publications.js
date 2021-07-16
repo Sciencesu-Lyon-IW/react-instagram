@@ -12,11 +12,12 @@ module.exports = (app) => {
     commonProductsRoutes.post('/publications/create', PublicationController.new);
 
     commonProductsRoutes.get('/publications/:id/edit', PublicationController.edit);
+    commonProductsRoutes.post('/publications/:id/addLike/:likes/:liked', PublicationController.addLike);
     commonProductsRoutes.post('/publications/:id/update', PublicationController.edit);
 
     commonProductsRoutes.get('/publications/:id/delete', PublicationController.deleteById);
 
-    app.use('/api', commonProductsRoutes);
+    app.use('/', commonProductsRoutes);
 
 
 };
