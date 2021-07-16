@@ -1,5 +1,5 @@
 const express = require('express'),
-    UserController = require('../controllers/publication');
+    UserController = require('../controllers/user');
 
 
 module.exports = (app) => {
@@ -13,10 +13,11 @@ module.exports = (app) => {
 
     commonProductsRoutes.get('/users/:id/edit', UserController.edit);
     commonProductsRoutes.post('/users/:id/update', UserController.edit);
+    commonProductsRoutes.post('/users/:follow/addFollow/:followers/:add', UserController.addFollower);
 
     commonProductsRoutes.get('/users/:id/delete', UserController.deleteById);
 
-    app.use('/api', commonProductsRoutes);
+    app.use('/', commonProductsRoutes);
 
 
 };

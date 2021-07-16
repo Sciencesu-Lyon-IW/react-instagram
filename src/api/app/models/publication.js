@@ -6,6 +6,10 @@ const publicationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    imgUrl: {
+        type: String,
+        required: true,
+    },
     creatorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -13,12 +17,28 @@ const publicationSchema = new mongoose.Schema({
     },
     created_at: {
         type: Date,
-        required: false
+        required: false,
     },
     edited_at: {
         type: Date,
         required: false
     },
+    likes : {
+        type: Array,
+        required: false,
+        liked: {
+            type: Array,
+            required: false,
+            creatorId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+        }
+    } ,
+
+
+
 
 }, {
     timestamps: true
