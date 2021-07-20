@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {useSelector} from "react-redux";
+const Img = (posts) => {
+    //const posts = useSelector((state) => state.postReducer)
 
-const Footer = () => {
+    console.log('img posts', posts)
     return (
         <div className="gallery-item" tabIndex={0}>
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" className="gallery-image" alt="" />
+            <img src={posts.imgUrl} className="gallery-image" alt="" />
             <div className="txt-post">
-                <p>Nom du post</p>
-                <FontAwesomeIcon icon={["far", "heart"]} />
+                <p>{posts.desc}</p>
+                {/*<FontAwesomeIcon icon={["far", "heart"]} />*/}
             </div>
         </div>
     );
 };
 
-export default Footer;
+export default Img;

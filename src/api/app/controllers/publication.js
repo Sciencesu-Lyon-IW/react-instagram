@@ -57,8 +57,8 @@ exports.getById = (req, res, next) => {
  * @param next
  */
 exports.new = (req, res, next) => {
-
     if(req.method === 'POST') {
+        return console.log(req.body);
 
         // Retrieve the user in DB for add his id to the publication
         const User = require('../models/user');
@@ -81,7 +81,7 @@ exports.new = (req, res, next) => {
                         console.error(err);
                         return res.redirect('/errors');
                     }
-
+                    console.log(publication)
                     return res.status(200).json({publication});
                 });
 

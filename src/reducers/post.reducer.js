@@ -1,9 +1,6 @@
 import {ADD_POST, EDIT_POST, GET_POSTS} from "../actions/post.action";
 
-const initialState = {
-    error:'',
-    posts:[]
-}
+const initialState = {}
 
 export default function postReducer(state = initialState, action) {
     // recupere les actions du post
@@ -13,11 +10,10 @@ export default function postReducer(state = initialState, action) {
             // get le payload (result)
             return action.payload
         case ADD_POST:
+            console.log("action.payload",action.payload)
+            console.log('state', state)
             // [action.payload, ...state] recupere toutes les data du state + add new post
-            return [action.payload, ...state]
-        case EDIT_POST:
-            // [action.payload, ...state] recupere toutes les data du state + add new post
-            return [action.payload, ...state]
+            return [action.payload, ...state.publications]
         default:
             return state
     }

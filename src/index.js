@@ -5,6 +5,9 @@ import './styles/index.scss';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import store from './store/config'
+import {getPosts} from "./actions/post.action";
+
+store.dispatch(getPosts());
 
 ReactDOM.render(
   <React.StrictMode>

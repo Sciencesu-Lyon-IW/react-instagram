@@ -2,56 +2,55 @@ import * as React from 'react';
 import {useState} from "react";
 import {addPost, getPosts} from "../actions/post.action";
 import {useDispatch, useSelector} from "react-redux";
+import {json} from "express";
 
 const Post = () => {
-    const [post, setPost] = useState();
-    const [file, setFile] = useState();
-    const [password, setPassword] = useState();
+    const [description, setDescription] = useState();
+    const [imgUrl, setImgUrl] = useState();
 
     const [error, setError] = useState('');
     // chercher dans le store
-    const user = useSelector((state) => state.userReducer)
+
     const dispatch = useDispatch()
 
-    /*    useEffect(() => {
-            setTitle(title)
-            setContent(content)
-        }, []);*/
     const handleForm = async (e) => {
         e.preventDefault();
-        if (post){
-            console.log('post',post)
-            console.log('file',file)
+        let userId = '60f1c4f43f7b623038bf2998'
+        if (description && imgUrl){
+            console.log('imgurl', JSON.parse(imgUrl))
+
             const data = {
-                post,
-                file,
-                author: user[0].pseudo,
+                description,
+                imgUrl,
+                userId,
                 likes: 0,
             }
             await dispatch(addPost(data))
-            setFile('')
-            setPost('')
+            setDescription('')
+            setImgUrl('')
             dispatch(getPosts())
+
         }else {
             setError('Erreur lors de l\'ajout d\'un post')
         }
     }
 
     return (
-        <form action="" onSubmit={(e) => handleForm(e)}>
+        <form action="" encType="multipart/form-data" onSubmit={(e) => handleForm(e)} >
             <input
                 type="text"
                 id="post"
                 name="post"
                 placeholder="Votre post"
-                onChange={(event) => setPost(event.target.value)}/>
+                onChange={(event) => setDescription(event.target.value)}/>
 
             <input
                 type="file"
                 id="avatar"
                 name="avatar"
                 accept="image/png, image/jpeg"
-                onChange={(event) => setFile(event.target.value)}
+                onChange={(event) => setImgUrl(event.target.files[0])}
+
             />
             <input type="submit" value="Submit"/>
             {error}

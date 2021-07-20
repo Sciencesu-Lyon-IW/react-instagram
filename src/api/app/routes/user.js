@@ -15,6 +15,8 @@ module.exports = (app) => {
     commonProductsRoutes.post('/users/:id/update', UserController.edit);
     commonProductsRoutes.post('/users/:follow/addFollow/:followers/:add', UserController.addFollower);
 
+    commonProductsRoutes.post('/users/login', UserController.login);
+
     commonProductsRoutes.get('/users/:id/delete', UserController.deleteById);
 
     app.use('/', commonProductsRoutes);

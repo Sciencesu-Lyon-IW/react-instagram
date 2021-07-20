@@ -1,17 +1,20 @@
 import * as React from 'react';
-import Image from "../components/Image";
 import Img from "../components/Img";
-import User from "../components/User";
-import Edit from "../components/Edit";
-import Infos from "../components/Infos";
-import Description from "../components/Description";
 import Post from "../components/Post";
+import {getUser, resetStore} from "../actions/user.action";
+import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {isEmpty} from "../utils/isEmpty";
+import store from "../store/config";
+import {getPosts} from "../actions/post.action";
 
-
-const Registration = () => {
-
+const Content = () => {
+    const posts = useSelector((state) => state.postReducer).publications
     return (
         <div>
+            <NavLink exact to='/'>
+                <button onClick={resetStore}>Déconnexion</button>
+            </NavLink>
             <header>
                 <div className="container">
                     <Post/>
@@ -20,9 +23,15 @@ const Registration = () => {
             <main>
                 <div className="container">
                     <div className="gallery">
-                        <Img/>
-                        <Img/>
-                        <Img/>
+                        <div className="post-container">
+                            {!isEmpty(posts) &&
+                            posts.map((post, index) =>
+                                <Img
+                                    desc={post.description}
+                                    imgUrl={post.imgUrl}
+                                    key={index} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </main>
@@ -30,4 +39,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Content;

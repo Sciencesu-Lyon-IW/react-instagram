@@ -50,6 +50,35 @@ exports.getById = (req, res, next) => {
 
 };
 
+
+
+/**
+ * Method used for retrieve an user by his id
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.login = (req, res, next) => {
+    if (req.path.includes('new') || req.path.includes('edit') || req.path.includes('delete')) {
+        return next();
+    }
+    let email  = req.body.email;
+    let pass = req.body.password
+    console.log(req.body)
+    User
+        .findOne({email: email, password: pass})
+        .exec((err, user) => {
+            if(err) {
+                console.error(err);
+                return res.status(400).json(err);
+
+            }
+            return res.status(200).json({user});
+        });
+
+};
+
+
 /**
  * Method used for add a new user or show the new page
  * @param req

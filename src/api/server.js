@@ -1,16 +1,37 @@
 require('dotenv').config();
 
-const express = require('express'),
+/*const express = require('express'),
     mongoose = require('mongoose'),
     User = require('./app/models/user'),
     cors = require('cors'),
-    path = require('path');
+    bcrypt = require("bcryptjs");*/
+
+const express = require('express')
 
 // Create app
 const app = express();
+const password = "instagram"
+const saltRounds = 10
+function hash() {
+    bcrypt.genSalt(saltRounds, function (saltError, salt) {
+        if (saltError) {
+            throw saltError
+        } else {
+            bcrypt.hash(password, salt, function(hashError, hash) {
+                if (hashError) {
+                    throw hashError
+                } else {
+                    console.log(hash)
+                    return hash
+                }
+            })
+        }
+    })
+}
 
 
 //Prevent cors policy errors
+
 app.use(cors());
 
 // For all the POST form
@@ -28,7 +49,6 @@ mongoose.connect('mongodb+srv://jonathan:instagram@instagramcluster-irleu.ua2wt.
 require('./app/routes/publications')(app)
 require('./app/routes/user')(app)
 
-
 // Check if we have a user in DB else add one
 //Const User = require('./app/models/user');
 User
@@ -43,7 +63,8 @@ User
                 username: 'JonathanL',
                 email: 'contact@jonathanlachaud.fr',
                 firstname: 'Jonathan',
-                lastname: 'LACHAUD'
+                lastname: 'LACHAUD',
+                password: hash()
             }).save();
         }
     });
